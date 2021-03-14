@@ -9,7 +9,7 @@ tar -zcvf "habck$name.tar.gz" --exclude='/docker/homeassistant/config/appdaemon/
 
 echo Cancello file piu Vecchi di 30 Giorni in /docker/backup/
 
-find /docker/backup/ -type d -mtime +30 -exec rm habck*.tar.gz \;
+find /docker/backup/ -ctime +30 -name "*.tar.gz" -delete
 
 echo Eseguo Sync di /docker/backup/ su Google Drive in HACore_Backup
 
