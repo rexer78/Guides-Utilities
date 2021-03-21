@@ -9,3 +9,8 @@ https://github.com/Sennevds/system_sensors
 
 Same Usefull Command Linux
 http://lugscandiano.org/index.php/Script_e_comandi_utili
+
+
+My Favorite Repo for IOT, With Nodered MQTT Zigbee2MQTT and Google Home
+https://github.com/william89731/IOT-home-automation
+
