@@ -1,0 +1,69 @@
+https://github.com/revoxhere/duino-coin/wiki/How-to-compile-fasthash-accelerations
+
+Linux
+sudo apt update
+sudo apt install python3 python3-pip git python3-pil python3-pil.imagetk -y # Install dependencies
+git clone https://github.com/revoxhere/duino-coin /duino-coin # Clone Duino-Coin repository
+cd duino-coin
+python3 -m venv .
+source /duino-coin/bin/activate
+python3 -m pip install -r requirements.txt # Install pip dependencies
+
+After doing this, you are good to go with launching the software (e.g. python3 PC_Miner.py).
+
+# Create a systemctl configuration file for Duino-Coin
+sudo nano /etc/systemd/system/duino.service
+-----------------------------------------------------------------------------------------------------
+[Unit]
+Description=duino-coin
+After=network.target
+
+[Service]
+ExecStart=/bin/bash -c 'source /duino-coin/bin/activate; /duino-coin/bin/python3 PC_Miner.py'
+WorkingDirectory=/duino-coin
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target
+
+---------------------------------------------------------------------------------------------
+
+ctrl+x  Salvare
+
+ systemctl daemon-reload
+ 
+ systemctl start duino
+
+ systemctl status duino
+
+Se da errore che non trova accelleratore hardware
+ 
+ systemctl stop duino
+
+seguire la procedura a questo indirizzo
+https://github.com/revoxhere/duino-coin/wiki/How-to-compile-fasthash-accelerations
+
+sudo apt update && sudo apt upgrade -y && sudo apt install python3 python3-pip -y
+# Install rustup for compilation:
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs/ | sh
+source $HOME/.cargo/env
+# Download duino fasthash:
+wget https://server.duinocoin.com/fasthash/libducohash.tar.gz
+# Unpack it:
+tar -xvf libducohash.tar.gz
+# Go to the dir:
+cd libducohash
+# Compile it:
+cargo build --release
+# Extract the module:
+mv target/release/libducohasher.so .
+# Confirm it works:
+wget https://server.duinocoin.com/fasthash/PC_Miner.py
+
+poi copiare il contenuto della cartella libducohash in duino-coin
+e riavviare lo scrypt
+  
+ systemctl start duino
